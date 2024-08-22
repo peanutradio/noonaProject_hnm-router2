@@ -1,16 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
-const ProductCard = () => {
+const ProductCard = ({ item }) => {
+  const navigate = useNavigate();
+  const showDetail = () => {
+    navigate(`/product/${item.id}`);
+  };
+
+  const [isHover, setIsHover] = useState(false);
+
+  const containerStyle = {
+    width: "300px",
+    overflow: "hidden",
+    cursor: "pointer",
+  };
+
+  const imageStyle = {
+    width: "100%",
+    height: "auto",
+    transition: "transform 0.3s ease",
+    transform: isHover ? "scale(1.1)" : "scale(1)",
+  };
+
   return (
-    <div>
-      <img
-        src="https://lp2.hm.com/hmgoepprod?set=quality%5B79%5D%2Csource%5B%2F03%2Fda%2F03daea8f97f5ddfdb62e6ca9d32c3249cdb7590e.jpg%5D%2Corigin%5Bdam%5D%2Ccategory%5B%5D%2Ctype%5BLOOKBOOK%5D%2Cres%5Bm%5D%2Chmver%5B1%5D&call=url[file:/product/fullscreen]"
-        style={{ width: "300px", height: "auto" }}
-      />
-      <div>Conciuos Choice</div>
-      <div>밸티드 트윌 코트</div>
-      <div>KRW 98,900</div>
-      <div>신제품</div>
+    <div onClick={showDetail}>
+      <div
+        style={containerStyle}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+      >
+        <img src={item?.img} alt={item?.title} style={imageStyle} />
+      </div>
+      <div>{item?.choice === true ? "Conscious Choice" : ""}</div>
+      <div>{item?.title}</div>
+      <div>{item?.price}</div>
+      <div>{item?.new === true ? "신제품" : ""}</div>
     </div>
   );
 };
