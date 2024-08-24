@@ -13,10 +13,10 @@ const ProductDetail = () => {
   // URL에서 상품 ID를 가져오기
   const { id } = useParams();
 
-  // 이미지 URL을 절대 경로로 변환하는 함수
-  const getImageUrl = (relativeUrl) => {
-    return `https://hnm-chan2.netlify.app${relativeUrl}`;
-  };
+  // // 이미지 URL을 절대 경로로 변환하는 함수
+  // const getImageUrl = (relativeUrl) => {
+  //   return `https://hnm-chan2.netlify.app${relativeUrl}`;
+  // };
 
   // 상품 상세 정보를 가져오는 비동기 함수
   const getProductDetail = async () => {

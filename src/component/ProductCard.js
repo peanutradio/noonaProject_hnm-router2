@@ -11,10 +11,10 @@ const ProductCard = ({ item }) => {
     navigate(`/product/${id}`);
   };
 
-  // 이미지 URL을 절대 경로로 변환하는 함수
-  const getImageUrl = (relativeUrl) => {
-    return `https://hnm-chan2.netlify.app${relativeUrl}`;
-  };
+  // // 이미지 URL을 절대 경로로 변환하는 함수
+  // const getImageUrl = (relativeUrl) => {
+  //   return `https://hnm-chan2.netlify.app${relativeUrl}`;
+  // };
 
   return (
     // 카드 클릭 시 해당 상품의 상세 페이지로 이동
