@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faSearch, faBars } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ authenticate, setAuthenticate }) => {
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
   const menuList = [
     "여성",
     "Divided",
@@ -18,47 +19,83 @@ const Navbar = () => {
 
   const navigate = useNavigate();
 
-  const goToLogin = () => {
-    navigate("/login");
+  const handleAuth = () => {
+    if (authenticate) {
+      setAuthenticate(false);
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
   };
 
+  const search = (event) => {
+    if (event.key === "Enter") {
+      console.log("Searching with keyword:", searchKeyword);
+      navigate(`/?q=${encodeURIComponent(searchKeyword)}`);
+    }
+  };
+
+  // 사이드바 외부 클릭 시 닫히도록 처리
+  const handleClickOutside = (event) => {
+    if (!event.target.closest(".navbar") && showMenu) {
+      setShowMenu(false);
+    }
+  };
+
+  React.useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showMenu]);
+
   return (
-    <div>
-      <div>
-        <div className="login-button" onClick={goToLogin}>
-          <FontAwesomeIcon icon={faUser} />
-          <div>로그인</div>
+    <nav className="navbar">
+      <div className="navbar-content">
+        <div className="navbar-left">
+          <div className="navbar-logo">
+            <img
+              src="https://th.bing.com/th/id/OIP.FPqaiQ5CFCAcFMvmnlxcDwHaE4?w=279&h=182&c=7&r=0&o=5&dpr=1.5&pid=1.7"
+              alt="H&M Logo"
+              onClick={() => navigate("/")}
+            />
+          </div>
+        </div>
+        <div className="navbar-center">
+          <ul className="menu-list">
+            {menuList.map((menu, index) => (
+              <li key={index}>{menu}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="navbar-right">
+          <div className="searchbar">
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+              onKeyPress={search}
+              placeholder="제품검색"
+            />
+            <FontAwesomeIcon icon={faSearch} />
+          </div>
+          <div className="login-button" onClick={handleAuth}>
+            <FontAwesomeIcon icon={faUser} />
+            <span>{authenticate ? "로그아웃" : "로그인"}</span>
+          </div>
         </div>
       </div>
-      <div className="nav-section">
-        <img
-          width={100}
-          src="https://th.bing.com/th/id/OIP.FPqaiQ5CFCAcFMvmnlxcDwHaE4?w=279&h=182&c=7&r=0&o=5&dpr=1.5&pid=1.7"
-          alt="H&M Logo"
-        />
+      <div className="navbar-mobile">
+        <FontAwesomeIcon icon={faBars} onClick={() => setShowMenu(!showMenu)} />
       </div>
-      <div className="menu-area">
-        <ul className="menu-list">
+      <div className={`sidebar ${showMenu ? "show" : ""}`}>
+        <ul className="sidebar-menu-list">
           {menuList.map((menu, index) => (
             <li key={index}>{menu}</li>
           ))}
         </ul>
-
-        <div className="searchbar">
-          <FontAwesomeIcon icon={faSearch} />
-          <input
-            type="text"
-            placeholder="제품검색"
-            style={{
-              border: "none",
-              borderBottom: "1px solid #000",
-              outline: "none",
-              padding: "5px",
-            }}
-          />
-        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

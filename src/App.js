@@ -22,24 +22,20 @@ import PrivateRoute from "./routes/PrivateRoute";
 function App() {
   console.log(ProductAll, Login, ProductDetail); // 디버깅을 위해 추가
 
-  const [authenticate, setAuthenticate] = useState(false); //true면 로그인 됨. False는 로그인 됨;
-  useEffect(() => {
-    console.log("Aaaa", authenticate);
-  }, [authenticate]);
-
+  // 인증 상태를 관리하는 state 추가
+  const [authenticate, setAuthenticate] = useState(false);
   return (
     <div>
-      <Navbar />
+      {/* Navbar에 authenticate와 setAuthenticate 전달 */}
+      <Navbar authenticate={authenticate} setAuthenticate={setAuthenticate} />
       <Routes>
         <Route path="/" element={<ProductAll />} />
+        {/* Login 컴포넌트에 setAuthenticate 전달 */}
         <Route
           path="/login"
           element={<Login setAuthenticate={setAuthenticate} />}
         />
-        <Route
-          path="/product/:id"
-          element={<PrivateRoute authenticate={authenticate} />}
-        />
+        <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
     </div>
   );

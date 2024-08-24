@@ -1,35 +1,228 @@
-.login-button {
+/* 네비게이션 바 스타일 */
+.navbar {
+  padding: 10px 20px;
   display: flex;
-  justify-content: flex-end;
-  margin: 20px;
+  flex-direction: column; /* 수직 배치를 위해 컬럼 방향으로 변경 */
+  align-items: center; /* 아이템을 가운데로 정렬 */
+}
+
+.navbar-content {
+  display: flex;
+  justify-content: space-between; /* 로고와 검색 바를 양쪽 끝에 배치 */
+  align-items: center;
+  width: 100%; /* 전체 너비를 사용하여 양쪽 정렬이 가능하도록 함 */
+}
+
+.navbar-logo {
+  flex: 1; /* 로고가 중앙에 있도록 공간을 확보 */
+  display: flex;
+  justify-content: center; /* 로고를 중앙 정렬 */
+}
+
+.navbar-logo img {
+  width: 60px;
   cursor: pointer;
 }
 
-.nav-section {
+.navbar-center {
   display: flex;
-  justify-content: center;
+  flex-direction: column; /* 메뉴와 로고를 수직으로 배치 */
+  align-items: center;
+  width: 100%; /* 메뉴 리스트가 중앙에 위치하도록 너비를 전체로 설정 */
 }
 
 .menu-list {
   display: flex;
   list-style-type: none;
+  padding: 0;
+  margin: 10px 0; /* 로고와 메뉴 간격을 위해 상단 마진 추가 */
+  justify-content: center; /* 메뉴 리스트를 중앙 정렬 */
 }
 
 .menu-list li {
-  padding: 30px;
+  padding: 0 15px;
+  font-size: 14px;
 }
 
-.menu-area {
+.navbar-right {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end; /* 검색 바를 오른쪽 끝으로 정렬 */
+  align-items: center;
+  flex: 1; /* 검색 바 공간 확보 */
 }
 
 .searchbar {
-  /* display: flex; */
-  justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.searchbar input {
+  border: none;
+  border-bottom: 1px solid #000;
+  outline: none;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.login-button span {
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.navbar-mobile {
+  display: none;
+}
+
+.sidebar {
+  display: none;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+  .navbar-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-center {
+    order: 3;
+    margin-top: 10px;
+  }
+
+  .menu-list {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-mobile {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+  }
+
+  .sidebar {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #f8f9fa;
+    transition: 0.3s;
+    padding: 20px;
+    z-index: 1000;
+  }
+
+  .sidebar.show {
+    left: 0;
+  }
+
+  .sidebar-menu-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .sidebar-menu-list li {
+    padding: 10px 0;
+  }
+}
+
+/* 기존 스타일 유지 */
+/* ... (이전에 제공된 나머지 스타일) ... */
+.searchbar {
+  margin-top: 10px;
 }
 
 .product-img {
   display: flex;
   justify-content: flex-end;
+}
+
+/* ProductAll 페이지 스타일 */
+.product-all {
+  padding: 20px 0;
+}
+
+/* ProductCard 컴포넌트 스타일 */
+.product-card {
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+
+.product-card img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover img {
+  transform: scale(1.05);
+}
+
+.product-card .product-info {
+  margin-top: 10px;
+}
+
+.product-card .product-title {
+  font-weight: bold;
+}
+
+.product-card .product-price {
+  color: #888;
+}
+
+/* ProductDetail 페이지 스타일 */
+.product-detail {
+  padding: 40px 0;
+}
+
+.product-detail img {
+  width: 100%;
+  height: auto;
+}
+
+.product-detail .product-info {
+  padding: 20px;
+}
+
+.product-detail .product-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.product-detail .product-price {
+  font-size: 20px;
+  color: #888;
+  margin-bottom: 20px;
+}
+
+/* 로그인 페이지 스타일 */
+.login-page {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.login-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-page .form-group {
+  margin-bottom: 15px;
+}
+
+.login-page .btn-login {
+  width: 100%;
 }
