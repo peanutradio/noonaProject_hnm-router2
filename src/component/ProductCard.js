@@ -13,7 +13,7 @@ const ProductCard = ({ item }) => {
 
   // 이미지 URL을 절대 경로로 변환하는 함수
   const getImageUrl = (relativeUrl) => {
-    return `https://noona-hnm.netlify.app${relativeUrl}`;
+    return `https://hnm-chan2.netlify.app${relativeUrl}`;
   };
 
   return (

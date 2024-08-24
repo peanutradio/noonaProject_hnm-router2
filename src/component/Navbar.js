@@ -9,12 +9,19 @@ import { useNavigate } from "react-router-dom";
 const Navbar = ({ authenticate, setAuthenticate }) => {
   // 메뉴 목록 정의
   const menuList = [
-    "여성", "Divided", "남성", "신생아/유아", "아동", "H&M HOME", "Sale", "지속가능성",
+    "여성",
+    "Divided",
+    "남성",
+    "신생아/유아",
+    "아동",
+    "H&M HOME",
+    "Sale",
+    "지속가능성",
   ];
 
   // 사이드 메뉴의 너비 상태 (모바일 버전)
   let [width, setWidth] = useState(0);
-  
+
   // 페이지 이동을 위한 navigate 함수
   let navigate = useNavigate();
 
