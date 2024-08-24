@@ -18,7 +18,7 @@ const ProductAll = () => {
       // URL에서 검색 키워드 가져오기
       let keyword = query.get("q") || "";
       // API 요청 URL 구성
-      let url = `https://my-json-server.typicode.com/legobitna/hnm-react-router/products?q=${keyword}`;
+      let url = `https://my-json-server.typicode.com/peanutradio/noonaProject_hnm-router2/products?q=${keyword}`;
       // API 요청 보내기
       let response = await fetch(url);
       // 응답 데이터를 JSON으로 파싱
