@@ -39,39 +39,32 @@ const ProductDetail = () => {
   return (
     <Container className="product-detail-card">
       {error ? (
-        // 에러가 있을 경우 에러 메시지 표시
         <Alert variant="danger" className="text-center">
           {error}
         </Alert>
       ) : (
-        // 상품 상세 정보 표시
         <Row>
-          {/* 상품 이미지 */}
           <Col xs={12} md={6} className="product-detail-img">
-            <img src={getImageUrl(product.img)} alt={product.title} />
+            <img src={product.img} />
           </Col>
-          {/* 상품 정보 */}
           <Col xs={12} md={6}>
             <div className="product-info">{product.title}</div>
             <div className="product-info">₩ {product.price}</div>
             <div className="choice">
               {product.choice ? "Conscious choice" : ""}
             </div>
-            {/* 사이즈 선택 드롭다운 */}
             <Dropdown className="drop-down">
               <Dropdown.Toggle variant="outline-dark" id="dropdown-basic">
                 사이즈 선택
               </Dropdown.Toggle>
+
               <Dropdown.Menu>
                 {product?.size.length > 0 &&
                   product.size.map((item) => (
-                    <Dropdown.Item href="#/action-1" key={item}>
-                      {item}
-                    </Dropdown.Item>
+                    <Dropdown.Item href="#/action-1">{item}</Dropdown.Item>
                   ))}
               </Dropdown.Menu>
             </Dropdown>
-            {/* 장바구니 추가 버튼 */}
             <Button variant="dark" className="add-button">
               추가
             </Button>
