@@ -1,36 +1,38 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { Container } from "react-bootstrap";
+import { Container, Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Login = ({ setAuthenticate }) => {
+// Login 컴포넌트: 로그인 폼을 렌더링하고 처리
+const Login = ({ setAuthenticate, to }) => {
+  // 디버깅을 위한 콘솔 로그
+  console.log("tototo", to);
+
+  // 페이지 이동을 위한 navigate 함수
   const navigate = useNavigate();
-  const loginUser = (event) => {
-    event.preventDefault();
-    console.log("login user function issue");
-    setAuthenticate(true);
-    navigate("/");
+
+  // 로그인 처리 함수
+  const login = (event) => {
+    event.preventDefault(); // 폼 제출 기본 동작 방지
+    setAuthenticate(true); // 인증 상태를 true로 설정
+    navigate("/"); // 메인 페이지로 이동
   };
 
   return (
-    <Container>
-      <Form onSubmit={(event) => loginUser(event)}>
+    <Container className="login-area">
+      <Form className="login-form" onSubmit={login}>
+        {/* 이메일 입력 필드 */}
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control type="email" placeholder="Enter email" />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
+        {/* 비밀번호 입력 필드 */}
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check type="checkbox" label="Check me out" />
-        </Form.Group>
+
+        {/* 로그인 버튼 */}
         <Button variant="danger" type="submit">
           Login
         </Button>
